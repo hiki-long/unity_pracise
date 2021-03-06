@@ -15,6 +15,6 @@ public class GradientColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Image.color = Color.Evaluate(Mathf.Abs(Mathf.Cos(Time.time)));
+        // Image.color = Color.Evaluate(Mathf.Abs(Mathf.Cos(Time.time)));
     }
 }

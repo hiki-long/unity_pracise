@@ -123,8 +123,8 @@ public class Card : MonoBehaviour // Start is called before the first frame upda
         //gameobject是自己指定的类型
         buttonobj = skillbutton;
         Team team = Team.GetComponent<Team>();
-        int skillcost = skillbutton.GetComponent<Skill>().skillinfo.cost;
-        if(skillcost <= team.power)
+        int skillcost = skillbutton.GetComponent<Skill>().skillinfo.cost + (skillbutton.GetComponent<Skill>().skillinfo.used ? 1 : 0);
+        if(skillcost  <= team.power)
         {
             SkillBaseInfo info = skillbutton.GetComponent<Skill>().skillinfo;
             CardAndSkillinfo cardskill;

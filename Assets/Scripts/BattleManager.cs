@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 public class BattleManager : MonoBehaviour { //这里是进行回合管理的代码
+    public int thisindex;
+    private AudioSource audiosr;
+    private AudioClip audiohit;
+    private AudioClip audiobuff;
     public int turn;
     public int MaxTurn;
     public GameObject TurnText;
@@ -11,8 +16,12 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
     public GameObject EndButton;
     public GameObject StartText;
     [SerializeField] Image[] APs;
+    [SerializeField] GameObject[] Battlescene;
     public GameObject TeamHP;
-    public GameObject MonsterHP; public GameObject Cover; public GameObject cardplace; private Team team;
+    public GameObject MonsterHP; 
+    public GameObject Cover;
+    public GameObject cardplace;
+    private Team team;
     private Monster monster;
     private int apmax = 6;
     public GameObject showmshp;
@@ -24,6 +33,23 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
     private Vector3 MyDamage = new Vector3(0,140,0);
     public GameObject GuardBuff;
     public GameObject GuardTimes;
+    public AudioSource bgm;
+    private void Awake()
+    {
+        int tmp = GlobalControl.Instance.BattleSceneindex;
+        if(tmp != thisindex)
+        {
+            this.gameObject.SetActive(false);
+            this.bgm.Pause();
+            Battlescene[tmp].SetActive(true);
+        }
+        team = gameObject.GetComponent<Team>();
+        team.nowhp = GlobalControl.Instance.TeamLeftHP;
+        float temp = (float)team.nowhp / (float)team.hpall;
+        showushp.GetComponent<Text>().text = team.nowhp.ToString();
+        TeamHP.GetComponent<Image>().fillAmount = temp;
+        buffshowushp.GetComponent<Image>().fillAmount = temp;
+    }
     public void TurnIncrease()
     {
         this.turn += 1;
@@ -31,11 +57,14 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
 
     public void StartBattle()
     {
+        audiosr = this.gameObject.AddComponent<AudioSource>();
+        audiosr.playOnAwake = false;
+        audiohit = Resources.Load<AudioClip>("hitcut");
+        audiobuff = Resources.Load<AudioClip>("buffcut");
         this.StartButton.SetActive(false);
         this.StartText.SetActive(false);
         this.Cover.SetActive(false);
         this.turn = 1;
-        team = gameObject.GetComponent<Team>();
         team.PowerIncrease(this.turn);
         APs[0].sprite = Resources.Load<Sprite>("yellowap");
         APs[1].sprite = Resources.Load<Sprite>("yellowap");
@@ -139,6 +168,7 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
 
     public void TeamFirst(CardAndSkillinfo info)
     {//Card传递伤害信息
+        // Debug.Log(info.info.skillname);
         int skilltype = info.info.type;
         int atktimes = info.info.hittimes;
         float skillpower = info.info.skillpower;
@@ -153,6 +183,7 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
                 monster.nowhp -= damage;
                 DamagePopUp.Create(DamageEffect, MyDamage, damage, transform);
                 monster.nowhp = Math.Max(0, monster.nowhp);
+                audiosr.PlayOneShot(audiohit); 
                 UpdateMsHp();
             }
         }
@@ -186,13 +217,14 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
                 team.nowhp -= damage;
                 team.nowhp = Math.Max(0,team.nowhp);
                 DamagePopUp.Create(DamageEffect, MsDamage, damage, transform);
-                this.UpdateUsHp();
+                audiosr.PlayOneShot(audiohit);
+                UpdateUsHp();
             }
             else if(monster.list[i].type == (int)SkillType.Heal)
             {
                 double extra = rd.Next(90,110) / 100.0;
                 monster.nowhp += (int)(monster.list[i].skillpower * monster.atkall * extra);
-                this.UpdateMsHp();
+                UpdateMsHp();
             }
         }
         monster.Attack();
@@ -200,6 +232,7 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
     public void GuardButton()
     {
         team.guardlevel += 1;
+        audiosr.PlayOneShot(audiobuff);
         team.guardlevel = Math.Min(4, team.guardlevel);
         GuardTimes.GetComponent<Text>().text = "防御(" + team.guardlevel.ToString() + "/4)";
         GuardBuff.SetActive(true);
@@ -207,7 +240,9 @@ public class BattleManager : MonoBehaviour { //这里是进行回合管理的代
     public void EndGame()
     {
         //这里应该结束游戏，切换场景
-
+        // Debug.Log(team.nowhp);
+        GlobalControl.Instance.TeamLeftHP = team.nowhp;
+        SceneManager.LoadScene("Second");
     }
 
     public void GoShied()

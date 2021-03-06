@@ -14,9 +14,14 @@ public class Skill : MonoBehaviour{
     public Transform basecostrecord;
     private bool hasupdate = false;
     private bool hasinit = false;
+    void Awake()
+    {
+        Init();
+    }
     void Init()
     {
         //要记得处理(Clone)后缀
+        hasinit = true;
         string temp = gameobject.name.Replace("(Clone)","");
         skillinfo = CardInfo.getSkill(temp + num.ToString());
         allChild = GetComponentsInChildren<Transform>();
@@ -40,13 +45,14 @@ public class Skill : MonoBehaviour{
         string tmp;
         if(used)
         {
+            this.skillinfo.used = true;
             tmp = (this.skillinfo.cost+1).ToString();
             hasupdate = true;
         }
         else
         {
+            this.skillinfo.used = false;
             tmp = this.skillinfo.cost.ToString();
-            Debug.Log(tmp);
         }
         basecostrecord.GetComponent<Text>().text = tmp;
         costrecord.GetComponent<Text>().text = tmp;
@@ -56,7 +62,6 @@ public class Skill : MonoBehaviour{
     {
         if(!hasinit)
         {
-            hasinit = true;
             Init();
         }
         if(!hasupdate)

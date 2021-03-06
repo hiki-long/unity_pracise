@@ -2345,7 +2345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   num: 2
   gameobject: {fileID: 5817134278644495746}
-  costrecord: {fileID: 5817134278680348468}
+  costrecord: {fileID: 5817134278262457064}
   basecostrecord: {fileID: 5817134278680348468}
 --- !u!1 &5817134277357943752
 GameObject:
@@ -4391,7 +4391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameobject: {fileID: 5817134278428306965}
-  attack: 10000
+  attack: 5000
   hp: 100000
   attr: 0
   level: 0
@@ -5386,7 +5386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   num: 1
   gameobject: {fileID: 5817134278644495746}
-  costrecord: {fileID: 5817134279143351833}
+  costrecord: {fileID: 5817134278582359086}
   basecostrecord: {fileID: 5817134279143351833}
 --- !u!1 &5817134279330909056
 GameObject:

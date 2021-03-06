@@ -3243,7 +3243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   num: 1
   gameobject: {fileID: 6209527798867299191}
-  costrecord: {fileID: 6209527798225836268}
+  costrecord: {fileID: 6209527798803606235}
   basecostrecord: {fileID: 6209527798225836268}
 --- !u!1 &6209527798681030880
 GameObject:

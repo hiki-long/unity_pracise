@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   num: 2
   gameobject: {fileID: 2934261028143216031}
-  costrecord: {fileID: 2934261028174186281}
+  costrecord: {fileID: 2934261027785720565}
   basecostrecord: {fileID: 2934261028174186281}
 --- !u!1 &2934261026904291043
 GameObject:
@@ -3982,7 +3982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   num: 1
   gameobject: {fileID: 2934261028143216031}
-  costrecord: {fileID: 2934261028515718660}
+  costrecord: {fileID: 2934261027933754419}
   basecostrecord: {fileID: 2934261028515718660}
 --- !u!1 &2934261028862659485
 GameObject:
