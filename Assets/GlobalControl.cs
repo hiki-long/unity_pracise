@@ -5,11 +5,11 @@ using UnityEngine;
 public class GlobalControl : MonoBehaviour
 {
     //单例模式,控制全局
-    public static GlobalControl Instance;
-    public int BattleSceneindex;
-    public int PlayerPosindex;
-    public int TeamLeftHP;
-    public Vector3 playerpos;
+    public static GlobalControl Instance;//控制的唯一单例
+    public int BattleSceneindex;//怪物类型场景
+    public int PlayerPosindex;//玩家地图位置
+    public int TeamLeftHP;//联合部队剩余HP
+    public Vector3 playerpos;//玩家进入地图一开始的位置
 
     private void Awake()
     {
