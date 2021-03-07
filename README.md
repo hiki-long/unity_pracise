@@ -4,15 +4,15 @@
 
 1. 游戏开始场景
 
-   ![开始场景](https://github.com/hiki-long/unity_pracise/img/1.png)
+   ![开始场景](https://github.com/hiki-long/unity_pracise/tree/master/img/1.png)
 
 2.  游戏移动场景
 
-   ![移动场景](https://github.com/hiki-long/unity_practise/img/2.png)
+   ![移动场景](https://github.com/hiki-long/unity_pracise/tree/master/img/2.png)
 
 3. 游戏战斗场景
 
-   ![战斗场景](https://github.com/hiki-long/unity_practise/img/3.png)
+   ![战斗场景](https://github.com/hiki-long/unity_pracise/tree/master/img/3.png)
 
 ##### 待实现的场景
 
